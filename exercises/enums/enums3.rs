@@ -2,10 +2,13 @@
 // Address all the TODOs to make the tests pass!
 // Execute `rustlings hint enums3` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+
 
 enum Message {
-    // TODO: implement the message variant types based on their usage below
+    Move(Point),
+    Echo(String),
+    ChangeColor((u8, u8, u8)),
+    Quit
 }
 
 struct Point {
@@ -36,8 +39,14 @@ impl State {
         self.position = p;
     }
 
+    // https://stackoverflow.com/questions/50775023/why-do-i-get-an-error-when-pattern-matching-a-struct-like-enum-variant-with-fiel
     fn process(&mut self, message: Message) {
-        // TODO: create a match expression to process the different message variants
+        match message {
+            Message::Move(point) => self.move_position(point),
+            Message::ChangeColor((r, g, b)) => self.change_color((r, g, b)),
+            Message::Quit => self.quit(),
+            _ => ()
+        }
     }
 }
 
